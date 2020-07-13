@@ -19,14 +19,14 @@ class TabNavigation extends Component {
     render(){
         return (
             <Tabs 
-                id="controlled-tab-example"
+                id="tab-container"
 				activeKey={this.state.key}
 				onSelect={key => this.setState({ key })}
             >
-                <Tab eventKey="home" title="Study">
+                <Tab eventKey="home" title="Study" style={{ width: "100%"}}>
                     <PageStudy />
                 </Tab>
-                <Tab eventKey="profile" title="Admin">
+                <Tab eventKey="profile" title="Admin" style={{ width: "100%"}}>
                     <PageAdmin />
                 </Tab>
             </Tabs>
