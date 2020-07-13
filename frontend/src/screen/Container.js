@@ -5,6 +5,7 @@ import {
 } from "react-bootstrap";
 
 import PageStudy from "./PageStudy"
+import PageAdmin from "./PageAdmin"
 
 class TabNavigation extends Component {
 
@@ -26,9 +27,7 @@ class TabNavigation extends Component {
                     <PageStudy />
                 </Tab>
                 <Tab eventKey="profile" title="Admin">
-                    <div>
-                        profile
-                    </div>
+                    <PageAdmin />
                 </Tab>
             </Tabs>
         )
@@ -42,6 +41,9 @@ const containerStyle = {
     backgroundColor: "#FFFFFF",
     padding: 20,
     borderRadius: 10,
+
+    display: "flex",
+    flexDirection: "column"
 }
 
 export default class Container extends Component{

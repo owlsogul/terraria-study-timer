@@ -19,27 +19,10 @@ class Timer extends Component {
             <div>
                 <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
                         <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="holder.js/800x400?text=First slide&bg=373940"
-                            alt="First slide"
-                            />
-                            <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>
+                            hi
                         </Carousel.Item>
                         <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="holder.js/800x400?text=Second slide&bg=282c34"
-                            alt="Second slide"
-                            />
-
-                            <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </Carousel.Caption>
+                            hello
                         </Carousel.Item>
                     </Carousel>
             </div>
@@ -74,6 +57,14 @@ const studyStyle = {
     alignItems: "center"
 }
 
+const timerStyle = {
+    height: "50%"
+}
+
+const loggerStyle = {
+    height: "50%"
+}
+
 export default class PageStudy extends Component{
 
     constructor(props){
@@ -83,10 +74,10 @@ export default class PageStudy extends Component{
     render(){
         return (
             <div style={studyStyle}>
-                <div>
+                <div style={timerStyle}>
                     <Timer />
                 </div>
-                <div>
+                <div style={loggerStyle}>
                     <Logger />
                 </div>
             </div>
