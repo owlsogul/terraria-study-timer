@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import Carousel from 'react-bootstrap/Carousel'
+import {
+    Button,
+    Carousel,
+    InputGroup,
+    FormControl
+} from 'react-bootstrap'
+import Title from "../component/Title"
+import TimerContent from "../component/TimerContent"
 
 function ifElse(l, v){
     return l ? l : v
@@ -9,66 +16,52 @@ function padding(n){
     return n < 10 ? "0"+n : n;
 }
 
-class TimerComponent extends Component {
-
-    constructor(props){
-        super(props)
-        this.state = {
-            diff: 0
-        }
-    }
-
-    componentDidMount(){
-        this.timer = setInterval(()=>{
-            const nowAt = new Date()
-            const startedAt = ifElse(this.props.startedAt, nowAt)
-            this.setState({ diff: nowAt - startedAt })
-            console.log(nowAt- startedAt)
-        }, 10)
-    }
-
-    componentWillUnmount(){
-        //if (this.timer) clearInterval(this.timer)
-    }
-
-    render(){
-        let diff = this.state.diff
-        let hour = Math.floor(diff / (60*60*1000))
-        diff -= hour * (60*60*1000)
-        let min = Math.floor(diff / (60*1000))
-        diff -= min * (60*1000)
-        let sec = Math.floor(diff/1000)
-
-        return (
-            <div>
-                {padding(hour)} : {padding(min)} : {padding(sec)}
-            </div>
-        )
-    }
-}
-
 class Timer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            index: 0
+            index: 0,
+            isStudying: false,
+            title: ""
         }
         this.handleSelect = this.handleSelect.bind(this)
+        this.handleStartStudy = this.handleStartStudy.bind(this)
+        this.handleTitle = this.handleTitle.bind(this)
     }
 
     handleSelect(selectedIndex, e){
         this.setState({ index: selectedIndex })
     }
 
+    handleTitle(e){
+        this.setState({ title: e.currentTarget.value })
+    }
+
+    handleStartStudy(){
+
+    }
+
     render(){
         return (
-            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ height: "100%"}} slide={false}>
+            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ height: "100%"}} interval={null}>
                 <Carousel.Item>
+                    <p>공부 시간</p>
+                    <TimerComponent startedAt={new Date()}/>
+                    <InputGroup className="mb-3">
+                        <FormControl
+                            placeholder="무엇을 공부하나요?"
+                            value={this.state.title}
+                            onInput={this.handleTitle}
+                        />
+                        <InputGroup.Append>
+                            <Button variant="primary" onClick={this.handleStartStudy}>START</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <p>남은 시간</p>
                     <TimerComponent startedAt={new Date()}/>
                 </Carousel.Item>
-                {/* <Carousel.Item>
-                    <TimerComponent startedAt={new Date()}/>
-                </Carousel.Item> */}
             </Carousel>
         )
     }
@@ -83,7 +76,7 @@ class Logger extends Component{
     render(){
         return (
             <div>
-                공부 기록표 <br />
+                <p>공부 기록표</p>
                 20.11.12 23:00:00 수학공부 + 1h 30min (~20.11.12 24:30:00)<br />
                 스크롤 가능하게<br />
             </div>
@@ -98,16 +91,22 @@ const studyStyle = {
     display: "flex",
     flexDirection : "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 5
 }
 
 const timerStyle = {
     width: "100%",
-    height: "50%"
+    height: "50%",
+    backgroundColor: "#EEEEEE",
+    borderRadius: 5,
+    overflow:"auto",
+    padding: 10
 }
 
 const loggerStyle = {
-    height: "50%"
+    height: "50%",
+    overflow: "auto"
 }
 
 export default class PageStudy extends Component{
