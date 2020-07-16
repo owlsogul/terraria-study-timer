@@ -8,6 +8,13 @@ const session = require('express-session');
 app.use(cookieParser(config.cookieKey));
 app.use(express.json())
 
+
+const cors = require('cors');
+app.use(cors({
+  preflightContinue: true,
+  credentials: true,
+})); // CORS 설정
+
 app.use(session({
  secret: config.cookieKey,
  resave: false,

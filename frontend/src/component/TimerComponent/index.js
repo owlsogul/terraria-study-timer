@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+function ifElse(l, v){
+    return l ? l : v
+}
+
+function padding(n){
+    return n < 10 ? "0"+n : n;
+}
+
 export default class TimerComponent extends Component {
 
     constructor(props){
